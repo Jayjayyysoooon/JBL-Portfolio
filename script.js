@@ -9,6 +9,8 @@ const year = document.getElementById("year");
 
 const projectGalleries = document.querySelectorAll(".project-gallery");
 
+const projectPreviewVideos = document.querySelectorAll(".project-preview-video");
+
 const imageModal = document.getElementById("imageModal");
 
 const imageModalPreview = document.getElementById("imageModalPreview");
@@ -18,6 +20,21 @@ const imageModalCaption = document.getElementById("imageModalCaption");
 const imageModalClose = document.getElementById("imageModalClose");
 
 let lastFocusedGallery;
+
+
+projectPreviewVideos.forEach(function (video) {
+
+    function setPreviewSpeed() {
+
+        video.playbackRate = 2;
+
+    }
+
+    setPreviewSpeed();
+
+    video.addEventListener("loadedmetadata", setPreviewSpeed);
+
+});
 
 
 function setTheme(theme) {
