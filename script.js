@@ -7,6 +7,18 @@ const themeButton = document.getElementById("themeButton");
 
 const year = document.getElementById("year");
 
+const projectGalleries = document.querySelectorAll(".project-gallery");
+
+const imageModal = document.getElementById("imageModal");
+
+const imageModalPreview = document.getElementById("imageModalPreview");
+
+const imageModalCaption = document.getElementById("imageModalCaption");
+
+const imageModalClose = document.getElementById("imageModalClose");
+
+let lastFocusedGallery;
+
 
 function setTheme(theme) {
 
@@ -106,6 +118,98 @@ themeButton.addEventListener("click", function () {
     const currentTheme = document.documentElement.dataset.theme;
 
     setTheme(currentTheme === "light" ? "dark" : "light");
+
+});
+
+
+function closeImageModal() {
+
+    imageModal.classList.remove("is-open");
+
+    imageModal.setAttribute("aria-hidden", "true");
+
+    document.body.classList.remove("modal-open");
+
+    if (lastFocusedGallery) {
+
+        lastFocusedGallery.focus();
+
+    }
+
+}
+
+
+projectGalleries.forEach(function (gallery) {
+
+    gallery.addEventListener("click", function () {
+
+        const screenshots = gallery.querySelectorAll(".project-screenshot");
+
+        const activeScreenshot = Array.from(screenshots).reduce(
+            function (visibleScreenshot, screenshot) {
+
+                const visibleOpacity = parseFloat(
+                    window.getComputedStyle(visibleScreenshot).opacity
+                );
+
+                const screenshotOpacity = parseFloat(
+                    window.getComputedStyle(screenshot).opacity
+                );
+
+                return screenshotOpacity > visibleOpacity
+                    ? screenshot
+                    : visibleScreenshot;
+
+            }
+        );
+
+        const projectName = gallery
+            .closest(".project-card")
+            .querySelector("h3")
+            .textContent;
+
+        lastFocusedGallery = gallery;
+
+        imageModalPreview.src = activeScreenshot.currentSrc || activeScreenshot.src;
+
+        imageModalPreview.alt = projectName + " screenshot";
+
+        imageModalCaption.textContent = projectName;
+
+        imageModal.classList.add("is-open");
+
+        imageModal.setAttribute("aria-hidden", "false");
+
+        document.body.classList.add("modal-open");
+
+        imageModalClose.focus();
+
+    });
+
+});
+
+
+imageModalClose.addEventListener("click", closeImageModal);
+
+
+imageModal.addEventListener("click", function (event) {
+
+    if (event.target === imageModal) {
+
+        closeImageModal();
+
+    }
+
+});
+
+
+document.addEventListener("keydown", function (event) {
+
+    if (event.key === "Escape" && imageModal.classList.contains("is-open")) {
+
+        closeImageModal();
+
+    }
 
 });
 
