@@ -486,15 +486,22 @@ button {
 
     border: 6px solid color-mix(in srgb, var(--card) 80%, transparent);
     border-radius: 50%;
+    overflow: hidden;
 
-    background: linear-gradient(145deg, var(--purple), var(--pink));
+    background: #ffffff;
     box-shadow: 0 0 0 5px rgba(159, 75, 255, 0.16);
+}
 
-    color: white;
 
-    font-size: 36px;
-    font-weight: 900;
-    letter-spacing: -2px;
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center 45%;
+    transform: scale(1.18);
 }
 
 
