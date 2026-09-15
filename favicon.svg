@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="jl-gradient" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9247ff"/>
+      <stop offset="0.55" stop-color="#e3449c"/>
+      <stop offset="1" stop-color="#ff4d72"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="#10141c"/>
+  <rect x="4" y="4" width="56" height="56" rx="13" fill="url(#jl-gradient)"/>
+  <text x="32" y="45" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="900" text-anchor="middle">JL</text>
+</svg>
